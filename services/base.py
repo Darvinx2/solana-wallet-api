@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 class BaseApiClient(ABC):
     @staticmethod
-    async def handler_response(
+    def handler_response(
         response: Response, api_name: str
     ) -> Mapping[str, Any]:
         if response.status_code == 401:
@@ -22,7 +22,7 @@ class BaseApiClient(ABC):
             logger.error(f"{api_name}: ошибка сервера ({response.status_code})")
             raise Exception(f"{api_name}: ошибка сервера ({response.status_code})")
         try:
-            data = await response.json()
+            data = response.json()
             return data
         except Exception as e:
             logger.error(f"{api_name} error {response.status_code}: {e}")
