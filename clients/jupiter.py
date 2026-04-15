@@ -4,7 +4,7 @@ from typing import List
 from httpx import Client, ConnectError, HTTPError
 
 from schemas.token import Token
-from services.base import BaseApiClient
+from clients.base import BaseApiClient
 
 logger = logging.getLogger(__name__)
 

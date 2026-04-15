@@ -4,7 +4,7 @@ from typing import Any, Mapping
 from httpx import Client, ConnectError, HTTPError
 
 from app.extensions import settings
-from services.base import BaseApiClient
+from clients.base import BaseApiClient
 from schemas.token import Token
 
 logger = logging.getLogger(__name__)
