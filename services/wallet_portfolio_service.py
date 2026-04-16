@@ -1,0 +1,29 @@
+from clients.jupiter import JupiterPrice
+from clients.moralis import MoralisPortfolio
+
+
+class WalletPortfolioService:
+    def __init__(self, moralis: MoralisPortfolio, jupiter: JupiterPrice):
+        self.moralis = moralis
+        self.jupiter = jupiter
+
+    def build_portfolio(self, wallet_address: str):
+        tokens = self._get_tokens(wallet_address)
+        priced_tokens = self._enrich_with_prices(tokens)
+        total_usd = self._calculate_total(priced_tokens)
+
+        return {
+            "wallet_address": wallet_address,
+            "tokens": priced_tokens,
+            "total_usd": total_usd,
+        }
+
+    def _get_tokens(self, wallet_address: str):
+        return self.moralis.get_tokens(wallet_address)
+
+    def _enrich_with_prices(self, tokens):
+        return self.jupiter.tokens_info(tokens)
+
+    @staticmethod
+    def _calculate_total(tokens):
+        return sum(token.total_amount or 0 for token in tokens)
