@@ -12,13 +12,12 @@ logger = logging.getLogger(__name__)
 class JupiterPrice(BaseApiClient):
     BASE_URL = "https://lite-api.jup.ag/tokens/v2/"
 
-    def __init__(self, session: Client, token: List[Token]):
+    def __init__(self, session: Client):
         self.session = session
-        self.token = token
 
-    async def tokens_info(self) -> List[Token]:
+    def tokens_info(self, tokens_moralis: List[Token]) -> List[Token]:
         tokens = []
-        for info in self.token:
+        for info in tokens_moralis:
             url = f"{self.BASE_URL}search?query={str(info.address)}"
             try:
                 r = self.session.get(url)
