@@ -32,7 +32,7 @@ def setup_logger(app: Flask):
         duration = time.time() - g.start_time
         app.logger.info(
             f"{request.method} {request.path} "
-            f"→ {response.status_code} "
+            f"-> {response.status_code} "
             f"({duration:.3f}s)"
         )
         return response

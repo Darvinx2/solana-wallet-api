@@ -1,5 +1,6 @@
 from flask import Flask
 
+from api.portfolio import bp as bp_get_portfolio
 from app.container import build_services
 from app.extensions import db, migrate, settings
 from services.wallet_portfolio_service import WalletPortfolioService
@@ -22,5 +23,7 @@ def create_app() -> App:
 
     services = build_services()
     app.portfolio_service = services["portfolio_service"]
+
+    app.register_blueprint(bp_get_portfolio)
 
     return app

@@ -15,7 +15,7 @@ class WalletPortfolioService:
 
         return {
             "wallet_address": wallet_address,
-            "tokens": priced_tokens,
+            "tokens": [t.model_dump() for t in priced_tokens],
             "total_usd": total_usd,
         }
 

@@ -6,4 +6,4 @@ class Config(BaseSettings):
     SQLALCHEMY_DATABASE_URI: str
     MORALIS_API_TOKEN: str
 
-    model_config = {"env_file": ".env"}
+    model_config = {"env_file": ".env", "extra": "ignore"}
